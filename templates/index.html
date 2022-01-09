@@ -134,12 +134,20 @@
                     <input type="submit" name="submit" value="Predict Price">
                 </div>
         
-            
-                <span class="padding-bottom--15" style="text-align: center">{{ hdb_prediction }}</span>
+                <span class="padding-bottom--15" style="text-align: center; font-weight: bold; color: blue;">
+                    {% if scroll %}
+                    <script>
+                        document.getElementById('{{ scroll }}').scrollIntoView();
+                        // or
+                        document.location.hash = '#' + '{{ scroll }}';
+                    </script>
+                    {% endif %}
+                    {{ hdb_prediction }}
+                </span>
                 <div class="footer-link padding-top--24">
                 <span>Created by <a href="https://github.com/sallihin/">Putra Nursallihin</a></span>
                 <span>Dataset provided by <a href="http://www.data.gov.sg">data.gov.sg</a></span>
-                <span>Background photo by <a href="https://www.pexels.com/@mryewhui?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels">Yew Hui Tan</a> from <a href="https://www.pexels.com/photo/city-building-construction-office-9144375/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels">Pexels</a></span>
+                <span>Background by <a href="https://www.pexels.com/@mryewhui?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels">Yew Hui Tan</a> from <a href="https://www.pexels.com/photo/city-building-construction-office-9144375/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels">Pexels</a></span>
                 </div>
                   
             </div>
