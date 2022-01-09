@@ -34,4 +34,4 @@ def predict():
     prediction = model.predict([features])
     
     # Format prediction text for display in "index.html"
-    return render_template('index.html', scroll='prediction', hdb_prediction = "Predicted price: ${:,.2f}".format(prediction[0]))   
+    return render_template('index.html', scroll='prediction', hdb_prediction = 'Predicted price: ${:,.2f}".format(prediction[0])')   
