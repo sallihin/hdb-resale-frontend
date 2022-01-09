@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HDB Resale Price Predictor</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+</head>
+
+<body>
+  <div class="login-root">
+    <div class="box-root flex-flex flex-direction--column" style="min-height: 100vh;flex-grow: 1;">
+      
+      <div class="box-root padding-top--24flex-flex flex-direction--column" style="flex-grow: 1; z-index: 9;">
+
+        <div class="formbg-outer">
+          <div class="formbg">
+            <div class="formbg-inner padding-horizontal--48 padding-bottom--24">
+
+                <div class="box-root padding-bottom--24 flex-flex flex-justifyContent--center">
+                    <h1>HDB Resale <br>Price Predictor</h1>
+                </div>
+              
+              <form action="/predict" method="POST">
+                <div class="field padding-bottom--24">
+                    <label for="month_to_buy">Month you intend to buy (1-12)</label>
+                    <input type="number" min="0" max="12" name="month_to_buy" value="{{ request.form['month_to_buy'] }}" required><br>
+                </div>
+                <div class="field padding-bottom--24">
+                    <label for="year_to_buy">Year you intend to buy (yyyy)</label>
+                    <input type="number" min="1900" step="1" name="year_to_buy" value="{{ request.form['year_to_buy'] }}" required><br>
+                </div>
+                <div class="field padding-bottom--24">
+                    <label for="floor_area">Floor Area (sqm)</label>
+                    <input type="number" min="0" step="1" name="floor_area" value="{{ request.form['floor_area'] }}" required><br>
+                </div>
+                <div class="field padding-bottom--24">
+                    <label for="lease_commencement_date">Lease Commence Year</label>
+                    <input type="number" min="0" step="1" name="lease_commencement_date" value="{{ request.form['lease_commencement_date'] }}" required><br>
+                </div>
+                <div class="field padding-bottom--24">
+                    <label for="town">Town</label>
+                    <select name="town">
+                        <option value="3">ANG MO KIO</option>
+                        <option value="4">BEDOK</option>
+                        <option value="5">BISHAN</option>
+                        <option value="6">BUKIT BATOK</option>
+                        <option value="7">BUKIT MERAH</option>
+                        <option value="8">BUKIT PANJANG</option>
+                        <option value="9">BUKIT TIMAH</option>
+                        <option value="10">CENTRAL AREA</option>
+                        <option value="11">CHOA CHU KANG</option>
+                        <option value="12">CLEMENTI</option>
+                        <option value="13">GEYLANG</option>
+                        <option value="14">HOUGANG</option>
+                        <option value="15">JURONG EAST</option>
+                        <option value="16">JURONG WEST</option>
+                        <option value="17">KALLANG/WHAMPOA</option>
+                        <option value="18">MARINE PARADE</option>
+                        <option value="19">PASIR RIS</option>
+                        <option value="20">PUNGGOL</option>
+                        <option value="21">QUEENSTOWN</option>
+                        <option value="22">SEMBAWANG</option>
+                        <option value="23">SENGKANG</option>
+                        <option value="24">SERANGOON</option>
+                        <option value="25">TAMPINES</option>
+                        <option value="26">TOA PAYOH</option>
+                        <option value="27">WOODLANDS</option>
+                        <option value="28">YISHUN</option>
+                    </select>
+                </div>
+                <div class="field padding-bottom--24">
+                    <label for="flat_type">Flat Type</label>
+                    <select name="flat_type">
+                        <option value="29">1 ROOM</option>
+                        <option value="30">2 ROOM</option>
+                        <option value="31">3 ROOM</option>
+                        <option value="32">4 ROOM</option>
+                        <option value="33">5 ROOM</option>
+                        <option value="34">EXECUTIVE</option>
+                        <option value="35">MULTI-GENERATION</option>
+                    </select>
+                </div>
+                <div class="field padding-bottom--24">
+                    <label for="floor_number">Floor Level</label>
+                    <select name="floor_number">
+                        <option value="36">01 TO 03</option>
+                        <option value="37">04 TO 06</option>
+                        <option value="38">07 TO 09</option>
+                        <option value="39">10 TO 12</option>
+                        <option value="40">13 TO 15</option>
+                        <option value="41">16 TO 18</option>
+                        <option value="42">19 TO 21</option>
+                        <option value="43">22 TO 24</option>
+                        <option value="44">25 TO 27</option>
+                        <option value="45">28 TO 30</option>
+                        <option value="46">31 TO 33</option>
+                        <option value="47">34 TO 36</option>
+                        <option value="48">37 TO 39</option>
+                        <option value="49">40 TO 42</option>
+                        <option value="50">49 TO 51</option>
+                        <option value="51">43 TO 45</option>
+                        <option value="52">46 TO 48 </option>
+                    </select>
+                </div>              
+                <div class="field padding-bottom--24">
+                    <label for="flat_model">Flat Model</label>
+                    <select name="flat_model">
+                        <option value="53">2-room</option>
+                        <option value="54">Adjoined flat</option>
+                        <option value="55">Apartment</option>
+                        <option value="56">DBSS</option>
+                        <option value="57">Improved</option>
+                        <option value="58">Improved-Maisonette</option>
+                        <option value="59">Maisonette</option>
+                        <option value="60">Model A</option>
+                        <option value="61">Model A-Maisonette</option>
+                        <option value="62">Model A2</option>
+                        <option value="63">Multi Generation</option>
+                        <option value="64">New Generation</option>
+                        <option value="65">Premium Apartment</option>
+                        <option value="66">Premium Apartment Loft</option>
+                        <option value="67">Premium Maisonette</option>
+                        <option value="68">Simplified</option>
+                        <option value="69 ">Standard </option>
+                        <option value="70">Terrace</option>
+                        <option value="71">Type S1</option>
+                        <option value="72">Type S2</option>
+                    </select>
+                </div>
+        
+                <div class="field padding-bottom--24">
+                    <input type="submit" name="submit" value="Predict Price">
+                </div>
+        
+            
+                <span class="padding-bottom--15" style="text-align: center">{{ hdb_prediction }}</span>
+                <div class="footer-link padding-top--24">
+                <span>Created by <a href="https://github.com/sallihin/">Putra Nursallihin</a></span>
+                <span>Dataset provided by <a href="http://www.data.gov.sg">data.gov.sg</a></span>
+                <span>Background photo by <a href="https://www.pexels.com/@mryewhui?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels">Yew Hui Tan</a> from <a href="https://www.pexels.com/photo/city-building-construction-office-9144375/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels">Pexels</a></span>
+                </div>
+                  
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+</html>
